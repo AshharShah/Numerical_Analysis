@@ -1,0 +1,29 @@
+% Newtons Algorithm
+syms 'x'    %including the library for making and computing f(x)
+i = 1;
+%max number of iterations to perform
+N0 = 1000;
+%tolerance for stopping
+tolerance = 0.00001;
+%initial value
+p0 = 0.75;
+f(x) = x^(1/x) - 1/5;      %function to solve
+df = diff(f);
+fprintf('The Function To Compute: %s\n', f(x));
+fprintf('Derivative of The Function: %s\n', char(df));
+fprintf('Iteration: %d, P(%d): %f \n', 0 , 0 , double(p0));
+while i <= N0
+    % newton method formula
+    p = p0 - (f(p0)/df(p0));
+    fprintf('Iteration: %d, P(%d): %f \n', i , i , double(p));
+    % if stopping criteria met then exit loop and display output
+    if (abs(double(p) - double(p0)) < tolerance)
+        fprintf('Solution is %f \n', double(p));
+        return
+    end
+    % increment counter and update value of p0
+    i = i + 1;
+    p0 = p;
+end
+% if the tolerance was not achieved then display error message
+fprintf('Error: Could not find a solution for given tolerance( %d ) after %d interations\n', tolerance, N0);
